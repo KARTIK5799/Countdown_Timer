@@ -7,7 +7,8 @@ import TimerView from "./Components/TimerView";
 function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [dateTime, setDateTime] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(0); 
+  const [timeRemaining, setTimeRemaining] = useState(0);
+  const [timerEnded, setTimerEnded] = useState(false); 
 
   useEffect(() => {
     let timer;
@@ -18,9 +19,10 @@ function App() {
           if (prevTime <= 0) {
             clearInterval(timer);
             setIsRunning(false);
+            setTimerEnded(true); 
             return 0;
           } else {
-            return prevTime - 1000; 
+            return prevTime - 1000;
           }
         });
       }, 1000);
@@ -33,6 +35,7 @@ function App() {
 
   const handleTimerToggle = () => {
     setIsRunning(!isRunning);
+    setTimerEnded(false); 
   };
 
   const handleDateTime = (value) => {
@@ -40,12 +43,14 @@ function App() {
     const timestamp = Date.parse(value);
     const currentTime = Date.now();
     setTimeRemaining(timestamp - currentTime);
+    setTimerEnded(false); 
   };
 
   const handleReset = () => {
     setIsRunning(false);
     setDateTime("");
     setTimeRemaining(0);
+    setTimerEnded(false); 
   };
 
   return (
@@ -63,6 +68,13 @@ function App() {
             onhandleReset={handleReset}
           />
           <TimerView timeRemaining={timeRemaining} />
+          {timerEnded && (
+             <div className="flex items-center justify-center mt-4 border p-4 rounded-lg">
+             <p className="text-3xl mr-2">🎉🎊</p>
+             <p className="text-xl text-gray-700 "><span className="text-red-500">The Countdown is over!</span> whats next on your adventure?.</p>
+             <p className="text-3xl mr-2">🎉🎊</p>
+           </div>
+          )} 
         </div>
         <div className="w-2/4">
           <img src={clocktimer} alt="clocktimer" />
