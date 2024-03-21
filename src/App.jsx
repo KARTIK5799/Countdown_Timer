@@ -55,7 +55,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-white h-screen w-screen flex overflow-hidden">
+      <div className="bg-white h-screen w-screen flex overflow-hidden sm:ml-90">
         <div className="w-2/4 flex items-center justify-center flex-col">
           <h1 className="mb-4 font-extrabold text-gray-700 text-6xl">
             <span className="text-red-500">CountDown</span> Timer
@@ -69,14 +69,15 @@ function App() {
           />
           <TimerView timeRemaining={timeRemaining} />
           {timerEnded && (
-             <div className="flex items-center justify-center mt-4 border p-4 rounded-lg">
-             <p className="text-3xl mr-2">🎉🎊</p>
-             <p className="text-xl text-gray-700 "><span className="text-red-500">The Countdown is over!</span> whats next on your adventure?.</p>
-             <p className="text-3xl mr-2">🎉🎊</p>
-           </div>
+            <div className="flex items-center justify-center mt-4 border p-4 rounded-lg animate-bounce">
+            <p className="text-3xl mr-2">🎉🎊</p>
+            <p className="text-xl text-gray-700"><span className="text-red-500">The Countdown is over!</span> {`What's next on your adventure?`}</p>
+            <p className="text-3xl mr-2">🎉🎊</p>
+        </div>
+        
           )} 
         </div>
-        <div className="w-2/4">
+        <div className="w-2/4 hidden md:block">
           <img src={clocktimer} alt="clocktimer" />
         </div>
       </div>
